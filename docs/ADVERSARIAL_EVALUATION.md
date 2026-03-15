@@ -68,6 +68,42 @@ The threat model MUST be defined before any adversarial evaluation begins. It co
 | **Perturbation budget (ε)** | {{EPSILON_VALUES}} |
 | **Attack surface** | *(test-time inputs / training data / reward signal / environment dynamics)* |
 
+### 2b) Formal Threat Model (YAML)
+
+```yaml
+threat_model:
+  adversary_knowledge: gray_box  # Adversary knows PQC standards and common crypto patterns
+  adversary_capability:
+    perturbation_type: semantic  # Adversary controls CVE metadata and code patterns
+    perturbation_budget:
+      norm: semantic
+      epsilon: "Can modify CVE descriptions, vendor names, code patterns"
+    access:
+      - cve_metadata  # Can influence CVE text via disclosure
+      - library_code  # Can introduce crypto patterns via libraries
+    constraints:
+      - "Cannot modify NIST PQC standard classifications"
+      - "Cannot modify NVD scoring infrastructure"
+  adversary_goal: integrity  # Cause mis-prioritization of migration effort
+  attack_surface:
+    controllable_features: [cve_description_text, vendor_name, library_patterns]
+    observable_features: [cvss_score, cwe_category, publication_date]
+    system_features: [nist_pqc_classification, algorithm_quantum_vulnerability]
+  attacks_tested:
+    - type: feature_perturbation
+      sophistication: low
+      tool: custom (controllability analysis only)
+  attacks_NOT_tested:
+    - type: adversarial_cve_description
+      reason: "NLP model not robust enough (AUC 0.6345) to warrant adversarial NLP testing"
+    - type: supply_chain_library_injection
+      reason: "Out of scope — scanner detects patterns, doesn't defend against injection"
+  limitation_acknowledgment: |
+    ML model performance is modest (AUC 0.6345). Primary contribution is the scanner
+    and NIST PQC mapping, not the ML model. Adversarial evaluation is limited to
+    controllability analysis (classifying features by who controls them).
+```
+
 **Rule:** The threat model MUST be documented in the report Methods section before adversarial experiments run.
 
 **Verification:** Report Methods section contains a threat model paragraph specifying all properties above. `config_resolved.yaml` records `threat_model`, `perturbation_norm`, and `epsilon` for every adversarial run.
