@@ -1,0 +1,127 @@
+# project.yaml — Post-Quantum Cryptography Migration Analyzer (FP-03)
+#
+# Self-directed research: ML-powered scanner that identifies quantum-vulnerable
+# cryptographic primitives in codebases and recommends PQC migration paths.
+# Profile: blog-track (govML v2.5)
+
+project:
+  name: "Post-Quantum Cryptography Migration Analyzer"
+  profile: blog-track
+  python_version: "3.11"
+  conda_env: "pqc-analyzer"
+
+authority:
+  tier1: "docs/PROJECT_BRIEF.md"
+  tier2: null
+  tier3: "docs/ADVERSARIAL_EVALUATION.md"
+
+publication:
+  title: "I Built a PQC Migration Scanner: Here's What Your Codebase Is Hiding"
+  pillar: "AI Security Architecture"
+  venue: "blog"
+  conference_cfp: "BSides / Real World Crypto"
+  target_date: "2026-05-15"
+
+skill_clusters:
+  L: { current: "L3+", target: "L4", how: "ML pipeline with NLP + structured prediction on CVE/crypto data" }
+  S: { current: "S3", target: "S3+", how: "Novel tool in emerging PQC domain" }
+  P: { current: "P3-adj", target: "P3", how: "CLI tool: pqc-analyzer scan --repo <path>" }
+  D: { current: "D4", target: "D4+", how: "PQC tradeoff analysis (performance vs security vs compatibility)" }
+  V: { current: "V1", target: "V2", how: "Published blog + high-demand topic (NIST PQC finalized 2024)" }
+
+infrastructure:
+  workload_type: "cpu_bound"
+  min_disk_gb: 5
+  min_ram_gb: 4
+  min_cores: 2
+  api_budget_usd: 10
+  data_disk: "/data"
+
+experiments:
+  seeds: [42, 123, 456]
+  parts:
+    - name: crypto_detection
+      methods: [regex_scanner, ast_parser, ml_classifier]
+      datasets: [nvd_crypto, github_crypto_usage]
+      script: "scripts/run_detection.py"
+      flags: "--sample-frac 1.0"
+      output_dir: "outputs/detection"
+    - name: priority_scoring
+      methods: [rule_based, ml_scorer, hybrid]
+      datasets: [nvd_crypto]
+      script: "scripts/run_scoring.py"
+      output_dir: "outputs/scoring"
+    - name: migration_recommendation
+      methods: [nist_mapping, risk_weighted]
+      datasets: [nist_pqc_standards]
+      script: "scripts/run_recommendations.py"
+      output_dir: "outputs/recommendations"
+
+datasets:
+  - name: nvd_crypto
+    source: "NVD API — crypto-related CVEs"
+    download_method: "api"
+    known_issues:
+      - "NVD API rate limits: 5 requests/30s without key, 50/30s with key"
+      - "Crypto CVEs need keyword filtering (RSA, AES, DH, ECDSA, SHA-1, MD5)"
+    local_path: "data/raw/nvd_crypto/"
+  - name: github_crypto_usage
+    source: "GitHub code search — crypto API usage patterns"
+    download_method: "api"
+    known_issues:
+      - "GitHub search API rate limits"
+      - "Results biased toward popular repos"
+    local_path: "data/raw/github_crypto/"
+  - name: nist_pqc_standards
+    source: "NIST PQC standardization documents"
+    download_method: "manual"
+    known_issues:
+      - "Standards are PDFs — need text extraction"
+    local_path: "data/raw/nist_pqc/"
+
+config:
+  base: "config/base.yaml"
+  layers:
+    - pattern: "config/detection/*.yaml"
+    - pattern: "config/scoring/*.yaml"
+  resolved_output: "config_resolved.yaml"
+
+phases:
+  - name: "Phase 0 — Environment & Data Acquisition"
+    checks:
+      - command: "bash scripts/verify_env.sh"
+        description: "Environment + imports verified"
+      - command: "python scripts/check_data_ready.py"
+        description: "NVD crypto CVEs downloaded"
+      - command: "git remote -v"
+        description: "Git remote configured"
+  - name: "Phase 1 — Crypto Detection Engine"
+    checks:
+      - command: "python scripts/run_detection.py --sample-frac 0.01 --seed 42"
+        description: "Detection smoke test"
+  - name: "Phase 2 — Priority Scoring"
+    checks:
+      - command: "python scripts/run_scoring.py --sample-frac 0.01 --seed 42"
+        description: "Scoring smoke test"
+  - name: "Phase 3 — Migration Recommendations & Findings"
+    checks:
+      - command: "python scripts/verify_manifests.py"
+        description: "All artifacts verified"
+      - command: "test -f FINDINGS.md"
+        description: "FINDINGS.md exists"
+
+artifacts:
+  run_id_pattern: "{part}_{method}_{dataset}_seed{seed}"
+  per_run_files:
+    - "summary.json"
+    - "config_resolved.yaml"
+  hash_algorithm: "sha256"
+  manifest_file: "outputs/manifest.json"
+
+ai_governance:
+  tools:
+    - name: "Claude Code"
+      role: "Coding copilot, test generation, script execution, NVD API ingestion"
+      prohibited: "Must not interpret migration risk levels (human security judgment). Must not scan private repos without authorization."
+  anti_ghostwriting: true
+  test_set_barrier: true
