@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pqc-analyzer"
+version = "0.1.0"
+description = "Scan codebases for quantum-vulnerable crypto and get NIST PQC migration recommendations"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [{name = "Rex Coleman"}]
+keywords = ["ai", "security", "machine-learning"]
+
+[project.urls]
+Homepage = "https://github.com/rexcoleman/pqc-migration-analyzer"
+Repository = "https://github.com/rexcoleman/pqc-migration-analyzer"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
