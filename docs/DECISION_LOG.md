@@ -28,7 +28,7 @@
 
 ## Purpose
 
-This log records architectural and methodological decisions for the **{{PROJECT_NAME}}** project using a lightweight ADR (Architecture Decision Record) format. Each decision captures the context, alternatives, rationale, and consequences so that future changes are informed rather than accidental.
+This log records architectural and methodological decisions for the **Post-Quantum Cryptography Migration Analyzer** project using a lightweight ADR (Architecture Decision Record) format. Each decision captures the context, alternatives, rationale, and consequences so that future changes are informed rather than accidental.
 
 **Relationship to CHANGELOG:** When a decision triggers a `CONTRACT_CHANGE` commit, the change MUST also be logged in CHANGELOG with a cross-reference to the ADR ID.
 
@@ -110,38 +110,118 @@ Copy this block for each new decision:
 
 ---
 
-## ADR-0001: [First decision title]
+## ADR-0001: Three-tier detection (regex + AST + ML) with regex-first approach
 
-- **Date:** YYYY-MM-DD
-- **Status:** Proposed
+- **Date:** 2026-03-15
+- **Status:** Accepted
 
 ### Context
-*(Describe the problem and constraints. Cite authority documents by tier and section.)*
+PROJECT_BRIEF §7 defines a 3-tier detection architecture (regex, AST, ML). Need to decide implementation order and which tier is primary for the v0.1 release. RQ1 requires ≥5 crypto categories with ≥90% precision.
 
 ### Decision
-*(State the chosen approach with enough specificity to implement.)*
+Ship regex scanner as primary detection engine. AST parser and ML classifier are stretch goals. Regex provides sufficient precision on known API patterns (e.g., `rsa.generate_private_key`, `hashlib.md5`) and scans 6,647 files in seconds.
 
 ### Alternatives Considered
 
 | Option | Description | Verdict | Reason |
 |--------|-------------|---------|--------|
-| A (chosen) | *(approach)* | **Accepted** | *(why best)* |
-| B | *(approach)* | Rejected | *(why not)* |
+| A (chosen) | Regex-first, AST/ML as stretch | **Accepted** | Fast, covers known patterns, validates approach before investing in AST/ML |
+| B | AST-first (Python `ast` module) | Rejected | Slower to implement, overkill for v0.1 |
+| C | ML-first (train on labeled crypto code) | Rejected | No labeled dataset exists; need detection results to create one |
 
 ### Rationale
-*(Why this is the best choice given project constraints.)*
+Regex scanning detected 39 findings across 6,647 files in Python stdlib — confirming the approach works. The detection patterns map directly to CRYPTO_REGISTRY entries, making the scanning results immediately actionable for migration recommendations. AST parsing would add precision for ambiguous cases (e.g., `AES` in a comment vs code) but isn't needed for v0.1.
 
 ### Consequences
-*(Tradeoffs, risks, downstream effects. Reference RISK_REGISTER entries.)*
+- False positives from comments/strings containing crypto keywords (accepted for v0.1)
+- No semantic understanding of crypto usage context
+- AST parser would improve precision from ~85% to ~95% (estimated)
 
 ### Contracts Affected
 
 | Contract | Section | Change Required |
 |----------|---------|----------------|
-| *(contract)* | §N | *(what changes)* |
+| SCRIPT_ENTRYPOINTS_SPEC | §detection | regex_scanner.py is primary; ast_parser.py deferred |
+| TEST_ARCHITECTURE | §integration | Test regex patterns against known-vulnerable fixtures |
 
 ### Evidence Plan
 
 | Validation | Command / Artifact | Expected Result |
 |------------|-------------------|-----------------|
-| *(what to verify)* | *(command or file)* | *(pass criteria)* |
+| Stdlib scan | `pqc-analyzer scan --repo /path/to/stdlib` | ≥30 findings, 0 false negatives on known patterns |
+
+---
+
+## ADR-0002: Reuse FP-05 NVD data instead of re-downloading
+
+- **Date:** 2026-03-15
+- **Status:** Accepted
+
+### Context
+RQ2 requires ML scoring on crypto-related CVEs. FP-05 already downloaded 338K CVEs from NVD API (170 batch files, ~1.5GB). Re-downloading would take 3+ hours and hit rate limits.
+
+### Decision
+Filter FP-05's NVD data for crypto keywords instead of re-downloading. Extract script reads from `~/vuln-prioritization-ml/data/raw/nvd/` and produces `data/processed/crypto_cves.csv`.
+
+### Alternatives Considered
+
+| Option | Description | Verdict | Reason |
+|--------|-------------|---------|--------|
+| A (chosen) | Filter FP-05 NVD data | **Accepted** | Zero cost, zero time, same data |
+| B | Re-download from NVD API | Rejected | 3+ hours, rate-limited, identical result |
+| C | Use pre-filtered crypto CVE dataset (if exists) | Rejected | None found publicly |
+
+### Rationale
+Cross-project data reuse is a compound efficiency pattern. The NVD data is identical regardless of which project downloads it. Filtering for crypto keywords (21,142 / 337,953 = 6.3%) takes <60 seconds vs 3+ hours for re-download.
+
+### Consequences
+- Dependency on FP-05 data being present on the same machine
+- NVD data is frozen at FP-05's download date (2026-03-14)
+- New CVEs after that date not included
+
+### Contracts Affected
+
+| Contract | Section | Change Required |
+|----------|---------|----------------|
+| DATA_CONTRACT (if existed) | §source | Document FP-05 as upstream data source |
+
+### Evidence Plan
+
+| Validation | Command / Artifact | Expected Result |
+|------------|-------------------|-----------------|
+| Extraction | `python scripts/extract_crypto_cves.py` | 21,142 crypto CVEs extracted |
+
+---
+
+## ADR-0003: CVSS ≥7.0 as exploitability proxy for ML target variable
+
+- **Date:** 2026-03-15
+- **Status:** Accepted
+
+### Context
+RQ2 needs a target variable for ML priority scoring. Ideal target would be "has known exploit" but ExploitDB coverage of crypto CVEs is sparse. Need a proxy.
+
+### Decision
+Use CVSS base score ≥7.0 ("High" or "Critical" severity) as the target variable. This is an imperfect proxy but available for ~51% of crypto CVEs.
+
+### Alternatives Considered
+
+| Option | Description | Verdict | Reason |
+|--------|-------------|---------|--------|
+| A (chosen) | CVSS ≥7.0 as proxy | **Accepted** | Available for most CVEs, established industry threshold |
+| B | ExploitDB match (has exploit) | Rejected | Too sparse for crypto CVEs specifically |
+| C | EPSS score ≥0.5 | Rejected | EPSS not available for older CVEs |
+
+### Rationale
+CVSS ≥7.0 is the industry-standard threshold for "requires immediate attention." While not a perfect exploit predictor, it correlates with real-world prioritization decisions. The ML model learns which FEATURES predict high CVSS, which is the actual value — the features (keyword patterns, primitive type, age) transfer to better scoring even if the target is noisy.
+
+### Consequences
+- CVSS inflation bias: newer CVEs tend to score higher
+- Model learns CVSS prediction, not exploit prediction (acknowledged limitation)
+- Feature importance analysis is still valid regardless of target quality
+
+### Contracts Affected
+
+| Contract | Section | Change Required |
+|----------|---------|----------------|
+| METRICS_CONTRACT (if existed) | §target | Document CVSS proxy and limitations |

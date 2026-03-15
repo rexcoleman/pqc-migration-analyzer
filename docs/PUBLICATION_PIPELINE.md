@@ -1,59 +1,17 @@
-# PUBLICATION PIPELINE
+# PUBLICATION PIPELINE — Post-Quantum Cryptography Migration Analyzer
 
-<!-- version: 1.0 -->
-<!-- created: 2026-03-14 -->
-<!-- last_validated_against: adversarial-ids-ml (FP-01) -->
+<!-- version: 2.0 -->
+<!-- created: 2026-03-15 -->
 
-> **Authority Hierarchy**
->
-> | Priority | Document | Role |
-> |----------|----------|------|
-> | Tier 1 | `{{TIER1_DOC}}` | Primary spec — highest authority |
-> | Tier 2 | `{{TIER2_DOC}}` | Clarifications — cannot override Tier 1 |
-> | Tier 3 | `{{TIER3_DOC}}` | Advisory only — non-binding if inconsistent with Tier 1/2 |
-> | Contract | This document | Implementation detail — subordinate to all tiers above |
->
-> **Conflict rule:** When a higher-tier document and this contract disagree, the higher tier wins.
-> Update this contract via `CONTRACT_CHANGE` or align implementation to the higher tier.
-
-### Companion Contracts
-
-**Upstream (this contract depends on):**
-- See [PUBLICATION_BRIEF](PUBLICATION_BRIEF.tmpl.md) for audience, narrative constraints, and message governance
-- See [PROJECT_BRIEF](PROJECT_BRIEF.tmpl.md) for thesis statement and research questions
-- See [HYPOTHESIS_CONTRACT](../core/HYPOTHESIS_CONTRACT.tmpl.md) for hypothesis resolution (source of key claims)
-- See [FIGURES_TABLES_CONTRACT](../core/FIGURES_TABLES_CONTRACT.tmpl.md) for artifact inventory
-- See [DECISION_LOG](../management/DECISION_LOG.tmpl.md) for architectural decisions to highlight
-
-**Downstream (depends on this contract):**
-- See [ACADEMIC_INTEGRITY_FIREWALL](ACADEMIC_INTEGRITY_FIREWALL.tmpl.md) for content reuse boundaries
-
-## Customization Guide
-
-Fill in all `{{PLACEHOLDER}}` values before use. Delete this section when customization is complete.
-
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{{PROJECT_NAME}}` | Project name | Adversarial ML on IDS |
-| `{{BLOG_TITLE}}` | Working title for blog post | Adversarial ML on Network Intrusion Detection |
-| `{{CONTENT_PILLAR}}` | Which brand pillar (AI Security Architecture / ML Systems Governance / Builder-in-Public) | AI Security Architecture |
-| `{{TARGET_AUDIENCE}}` | Primary audience for this post | P1: AI security hiring managers |
-| `{{CANONICAL_URL}}` | Blog URL where this will live | https://rexcoleman.dev/posts/adversarial-ids/ |
-| `{{REPO_URL}}` | GitHub repository URL | https://github.com/rexcoleman/adversarial-ids-ml |
-| `{{TIER1_DOC}}` | Tier 1 authority document | Project requirements spec (or null for self-directed) |
-| `{{TIER2_DOC}}` | Tier 2 authority document | FAQ or null |
-| `{{TIER3_DOC}}` | Tier 3 authority document | Advisory or null |
+> **Authority:** Subordinate to PROJECT_BRIEF (Tier 1)
 
 ---
 
 ## 1) Target Venue
 
-- [ ] Blog (canonical home — Hugo site)
-- [ ] Conference CFP (specify: _____________)
-- [ ] Academic workshop / journal (specify: _____________)
-- [ ] LinkedIn article (long-form)
-
-**Submission deadline:** *(if applicable)*
+- [x] Blog (canonical home — Hugo site)
+- [x] Conference CFP: BSides / Real World Crypto
+- [ ] LinkedIn article
 
 ---
 
@@ -61,109 +19,73 @@ Fill in all `{{PLACEHOLDER}}` values before use. Delete this section when custom
 
 | Property | Value |
 |----------|-------|
-| **Working title** | {{BLOG_TITLE}} |
-| **Content pillar** | {{CONTENT_PILLAR}} |
-| **Target audience** | {{TARGET_AUDIENCE}} |
-| **One-line thesis** | *(What is the single insight a reader walks away with?)* |
-| **What was shipped** | *(Link to repo, demo, or artifact that grounds this post)* |
+| **Working title** | I Built a PQC Migration Scanner: Here's What Your Codebase Is Hiding |
+| **Content pillar** | AI Security Architecture (40%) |
+| **Target audience** | P1: Security engineers evaluating PQC migration. P2: CISOs planning quantum readiness. P3: Hiring managers (crypto × AI signal). |
+| **One-line thesis** | Classical exploit risk — not quantum vulnerability — should drive PQC migration priority, and most crypto in your codebase isn't yours to change. |
+| **What was shipped** | github.com/rexcoleman/pqc-migration-analyzer — open-source CLI scanner |
 
 ### Voice Check
 
-This post MUST pass the builder-voice test:
-
 | Test | Pass? |
 |------|-------|
-| References something you built (not theoretical) | [ ] |
-| Shows work (code, architecture, data) not just opinions | [ ] |
-| Avoids "5 Tips" / "Why You Should" / "The Future of" framing | [ ] |
-| Includes at least one architecture diagram | [ ] |
-| Links to a GitHub repo with working code | [ ] |
+| References something you built | [x] CLI tool, 21K CVE dataset, ML scorer |
+| Shows work (code, data, architecture) | [x] Detection engine, scoring results, controllability matrix |
+| Avoids "5 Tips" / "Why You Should" framing | [x] "Here's What Your Codebase Is Hiding" = showing work |
+| Includes at least one architecture diagram | [ ] Need to create |
+| Links to GitHub repo | [x] |
 
 ---
 
 ## 3) Draft Structure
 
-| # | Section | Content | Estimated Length | Status |
-|---|---------|---------|-----------------|--------|
-| 1 | Hook | Problem statement — why this matters, in 2-3 sentences | 2-3 sentences | |
-| 2 | Context | What you built, what tools/frameworks you used, why this approach | 1 paragraph | |
-| 3 | Architecture | System-level diagram + explanation of key design decisions | 1-2 paragraphs + diagram | |
-| 4 | Key Findings | 3-5 findings with evidence (numbers, charts, code) | 3-5 subsections | |
-| 5 | Code Examples | Runnable snippets that prove the claims | 2-3 code blocks | |
-| 6 | What I Learned / What Broke | Honest reflection on failures and surprises | 1-2 paragraphs | |
-| 7 | Conclusion + Links | Summary + links to repo, govML, related posts | 1 paragraph | |
-
-### Architecture Diagram Requirement
-
-Every technical post MUST include at least one architecture diagram showing system-level design. Tools: Mermaid (renders in Hugo/GitHub/dev.to), Excalidraw (hand-drawn aesthetic), or draw.io.
-
-**Diagram captures:** *(describe what the diagram will show)*
+| # | Section | Content | Length | Status |
+|---|---------|---------|-------|--------|
+| 1 | Hook | "I scanned Python's standard library for quantum-vulnerable crypto. Found 39 findings." | 2 sentences | Pending |
+| 2 | Context | NIST PQC standards finalized (2024), but nobody knows what's in their codebase | 1 paragraph | Pending |
+| 3 | Architecture | 3-tier detection + ML scoring + controllability analysis diagram | 2 paragraphs + diagram | Pending |
+| 4 | Key Findings | (a) 21K crypto CVEs, (b) ML +14pp vs rules, (c) 70% library-controlled, (d) classical > quantum for priority | 4 subsections | Pending |
+| 5 | Code Example | `pqc-analyzer scan --repo ~/my-project` output | 1 code block | Pending |
+| 6 | What I Learned | Controllability determines migration actionability. 4th domain for ACA. | 2 paragraphs | Pending |
+| 7 | Conclusion | Repo link, govML link | 1 paragraph | Pending |
 
 ---
 
 ## 4) Evidence Inventory
 
-Map key claims to supporting artifacts from the project:
-
-| Claim | Evidence | Source File / Figure |
-|-------|---------|---------------------|
-| *(e.g., "Feature controllability enables 100% detection of noise attacks")* | *(metric, chart)* | *(FINDINGS.md §X, outputs/figures/Y.png)* |
-| | | |
-| | | |
+| Claim | Evidence | Source |
+|-------|---------|-------|
+| 21,142 crypto CVEs (6.3% of NVD) | Extraction count | `data/processed/crypto_cves.csv` |
+| 39 findings in Python stdlib | Scan result | `outputs/stdlib_scan.json` |
+| 19 critical (Shor-vulnerable) | Scan summary | Same |
+| ML +14.0pp vs rule-based | GradientBoosting AUC | `outputs/scoring/summary_seed42.json` |
+| Classical features dominate over Shor flag | Feature importance | Same |
+| 70% library-controlled | Controllability analysis | FINDINGS.md §RQ4 |
+| 4th domain ACA validation | Cross-project comparison | FINDINGS.md §RQ4 |
 
 ---
 
 ## 5) Distribution Checklist
 
 ### 5.1 Pre-Publication
-
-- [ ] Draft reviewed for builder voice (§2 voice check passes)
-- [ ] Architecture diagram finalized and embedded
-- [ ] Code examples tested and runnable
-- [ ] All claims traceable to evidence inventory (§4)
-- [ ] Links to repo and govML included
-- [ ] No anti-claims present (grep for "superior", "prove", "novel", "always", "never", "best")
+- [ ] Draft reviewed for builder voice
+- [ ] Architecture diagram finalized
+- [ ] Code example tested and runnable
+- [x] All claims traceable to evidence inventory
+- [ ] No anti-claims (grep for "superior", "prove", "novel", "always", "never", "best")
 
 ### 5.2 Publish
+- [ ] Hugo site (canonical URL)
+- [ ] Substack email
+- [ ] Canonical URL in metadata
 
-- [ ] Published on Hugo site (canonical URL: `{{CANONICAL_URL}}`)
-- [ ] Emailed via Substack (with email-specific intro paragraph)
-- [ ] Canonical URL set in Substack post metadata
+### 5.3 Cross-Post (24h)
+- [ ] dev.to with canonical URL
+- [ ] Hashnode with canonical URL
+- [ ] LinkedIn native post
+- [ ] Blog link as first comment
 
-### 5.3 Cross-Post (within 24 hours of publication)
-
-- [ ] Cross-posted to dev.to with canonical URL → `{{CANONICAL_URL}}`
-- [ ] Cross-posted to Hashnode with canonical URL → `{{CANONICAL_URL}}`
-- [ ] LinkedIn native text post written (key insight + 3-5 bullets)
-- [ ] Blog link added as first comment on LinkedIn post (not in post body)
-- [ ] Mastodon (infosec.exchange) post with link *(if account active)*
-
-### 5.4 Post-Publication (within 48 hours)
-
-- [ ] Submitted to Hacker News *(only for strong technical posts)*
-- [ ] Respond to comments on all platforms
-- [ ] Update govML LESSONS_LEARNED.md with any publishing friction
-
----
-
-## 6) Metrics to Track
-
-| Metric | Source | Check After |
-|--------|--------|-------------|
-| Blog page views | Cloudflare / Plausible Analytics | 7 days |
-| Substack open rate | Substack dashboard | 3 days |
-| LinkedIn impressions | LinkedIn analytics | 7 days |
-| dev.to / Hashnode views | Platform dashboards | 7 days |
-| GitHub repo traffic spike | GitHub Insights | 7 days |
-| Hacker News points *(if submitted)* | HN | 24 hours |
-
----
-
-## 7) Change Control Triggers
-
-The following changes require a `CONTRACT_CHANGE` commit:
-
-- Target venue or audience
-- Working title or one-sentence thesis
-- Draft structure (section additions/removals)
-- Distribution channel list
+### 5.4 Post-Publication (48h)
+- [ ] Hacker News (strong technical post — YES, PQC is high-interest)
+- [ ] Respond to comments
+- [ ] Update govML LESSONS_LEARNED
