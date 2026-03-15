@@ -1,0 +1,31 @@
+{
+  "seed": 456,
+  "train_size": 6180,
+  "test_size": 4676,
+  "split_year": 2023,
+  "features": 46,
+  "results": {
+    "rule_based": {
+      "auc": 0.49411846773046225
+    },
+    "LogisticRegression": {
+      "auc": 0.6253468808943593,
+      "f1": 0.5281672189650778,
+      "improvement_pp": 13.122841316389705
+    },
+    "RandomForest": {
+      "auc": 0.570782243149349,
+      "f1": 0.5673509286412513,
+      "improvement_pp": 7.666377541888675
+    },
+    "GradientBoosting": {
+      "auc": 0.6342689961863064,
+      "f1": 0.603372891942536,
+      "improvement_pp": 14.015052845584414
+    }
+  },
+  "best_model": "GradientBoosting",
+  "best_auc": 0.6342689961863064,
+  "best_improvement_pp": 14.015052845584414,
+  "rq2_pass": true
+}
