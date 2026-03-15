@@ -6,13 +6,15 @@
 
 | Metric | Value |
 |--------|-------|
-| GradientBoosting AUC | 0.6345 (+14pp over rule-based baseline) |
+| GradientBoosting AUC | 0.6345 (+14pp over rule-based baseline, modest absolute performance) |
 | Crypto CVEs scanned | 21,142 (6.3% of all NVD CVEs) |
 | Primitives detected | 12 categories (RSA, ECDSA, DH, AES, etc.) |
 | Shor-vulnerable (critical) | 19 findings in Python stdlib scan |
 | Controllability | 70% library-controlled, 20% developer-controlled |
 
 **Core insight:** Classical exploit risk dominates over quantum risk in migration prioritization. Organizations should fix known crypto CVEs before worrying about quantum threats.
+
+> **Note:** The ML scorer provides a +14pp improvement over rule-based baseline, though absolute performance (AUC 0.6345) is modest. The primary contribution of this project is the scanner and NIST PQC mapping infrastructure, not the ML model.
 
 ## Quick Start
 

@@ -13,9 +13,20 @@ We built an open-source tool that scans Python codebases for quantum-vulnerable 
 
 ---
 
+## Claim Strength Legend
+
+| Tag | Meaning |
+|-----|---------|
+| [DEMONSTRATED] | Directly measured, multi-seed, CI reported, raw data matches |
+| [SUGGESTED] | Consistent pattern but limited evidence (1-2 seeds, qualitative) |
+| [PROJECTED] | Extrapolated from partial evidence |
+| [HYPOTHESIZED] | Untested prediction |
+
+---
+
 ## RQ1: What Crypto Primitives Are in Real Codebases?
 
-**Result: Detection engine identifies 12 crypto primitive categories across 21,142 crypto-related CVEs (6.3% of all NVD CVEs).**
+**Result: Detection engine identifies 12 crypto primitive categories across 21,142 crypto-related CVEs [DEMONSTRATED] (6.3% of all NVD CVEs).**
 
 | Primitive | CVE Count | Quantum Risk | NIST Replacement |
 |-----------|-----------|-------------|-----------------|
@@ -45,12 +56,14 @@ We built an open-source tool that scans Python codebases for quantum-vulnerable 
 
 **Result: GradientBoosting outperforms rule-based baseline by +14.0pp AUC-ROC. PASS (criterion: ≥5pp).**
 
+> **Honest qualification:** The ML scorer provides a +14pp improvement over rule-based baseline, though absolute performance (AUC 0.6345) is modest and indicates the feature space captures limited signal for quantum vulnerability prediction. The primary contribution of this project is the scanner and NIST PQC mapping infrastructure, not the ML model.
+
 | Model | AUC-ROC | vs Baseline | Stable Across Seeds? |
 |-------|---------|-------------|---------------------|
 | Rule-based (CVSS + Shor flag) | 0.4941 | — | — |
-| LogisticRegression | 0.6253 | +13.1pp | Yes |
-| RandomForest | 0.5686 | +7.4pp | Yes |
-| **GradientBoosting** | **0.6345** | **+14.0pp** | **Yes (42/123/456)** |
+| LogisticRegression | 0.6253 [SUGGESTED] | +13.1pp | Yes |
+| RandomForest | 0.5686 [SUGGESTED] | +7.4pp | Yes |
+| **GradientBoosting** | **0.6345** [SUGGESTED] | **+14.0pp** [SUGGESTED] | **Yes (42/123/456)** |
 
 **Top predictive features** (GradientBoosting feature importance):
 1. `kw_heap` (0.147) — heap-related vulnerabilities are more exploitable
@@ -90,10 +103,10 @@ We built an open-source tool that scans Python codebases for quantum-vulnerable 
 
 | Controllability | % of Findings | Migration Action |
 |----------------|--------------|-----------------|
-| **Library-controlled** | ~70% | Wait for upstream library updates |
-| **Developer-controlled** | ~20% | Direct code changes — actionable now |
-| **Protocol-controlled** | ~8% | Wait for protocol standard updates |
-| **Hardware-controlled** | ~2% | Hardware replacement required |
+| **Library-controlled** | ~70% [DEMONSTRATED] | Wait for upstream library updates |
+| **Developer-controlled** | ~20% [DEMONSTRATED] | Direct code changes — actionable now |
+| **Protocol-controlled** | ~8% [DEMONSTRATED] | Wait for protocol standard updates |
+| **Hardware-controlled** | ~2% [DEMONSTRATED] | Hardware replacement required |
 
 **Cross-domain validation of adversarial control analysis:**
 
