@@ -1,0 +1,643 @@
+{
+  "root": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11",
+  "files_scanned": 6647,
+  "total_findings": 39,
+  "by_primitive": {
+    "MD5": 12,
+    "SHA-1": 8,
+    "Ed25519": 5,
+    "ECDSA": 14
+  },
+  "by_risk": {
+    "high": 20,
+    "critical": 19
+  },
+  "findings": [
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/poplib.py",
+      "line": 335,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "digest = hashlib.md5(digest).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/antigravity.py",
+      "line": 15,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "h = hashlib.md5(datedow, usedforsecurity=False).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/hashlib.py",
+      "line": 43,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": ">>> m = hashlib.md5()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1211,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "H = lambda x: hashlib.md5(x.encode(\"ascii\")).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1143,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "dig = hashlib.sha1(b).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1213,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "H = lambda x: hashlib.sha1(x.encode(\"ascii\")).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 148,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "return hashlib.md5(x).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 156,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "return hashlib.sha1(x).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 205,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "cnonce = hashlib.sha1(s).hexdigest()[:16]"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 212,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "In [23]: %timeit hashlib.md5(a).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 215,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "In [24]: %timeit hashlib.md5(pickle.dumps(a, protocol=2)).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 218,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "In [25]: %timeit hashlib.md5(cPickle.dumps(a, protocol=2)).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 228,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "return hashlib.md5(memoryview(x)).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/fontTools/varLib/interpolatablePlot.py",
+      "line": 161,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "h = hashlib.sha1(f.read()).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/sklearn/datasets/_openml.py",
+      "line": 526,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "md5 = hashlib.md5()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pandas/tests/io/pytables/test_store.py",
+      "line": 60,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "def checksum(filename, hash_factory=hashlib.md5, chunk_num_blocks=128):"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "line": 402,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "h = hashlib.sha1()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_php_builtins.py",
+      "line": 2512,
+      "primitive": "Ed25519",
+      "risk": "critical",
+      "content": "'sodium_crypto_sign_ed25519_pk_to_curve25519',"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_php_builtins.py",
+      "line": 2513,
+      "primitive": "Ed25519",
+      "risk": "critical",
+      "content": "'sodium_crypto_sign_ed25519_sk_to_curve25519',"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_mapping.py",
+      "line": 34,
+      "primitive": "Ed25519",
+      "risk": "critical",
+      "content": "'AscLexer': ('pygments.lexers.asc', 'ASCII armored', ('asc', 'pem'), ('*.asc', '*.pem', 'id_dsa', 'id_ecdsa', 'id_ecdsa_sk', 'id_ed25519', 'id_ed25519_sk', 'id_rsa'), ('application/pgp-keys', 'application/pgp-encrypted', 'application/pgp-signature', 'application/pem-certificate-chain')),"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/asc.py",
+      "line": 28,
+      "primitive": "Ed25519",
+      "risk": "critical",
+      "content": "'id_dsa', 'id_ecdsa', 'id_ecdsa_sk', 'id_ed25519', 'id_ed25519_sk',"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 148,
+      "primitive": "MD5",
+      "risk": "high",
+      "content": "return hashlib.md5(x).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 156,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "return hashlib.sha1(x).hexdigest()"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 205,
+      "primitive": "SHA-1",
+      "risk": "high",
+      "content": "cnonce = hashlib.sha1(s).hexdigest()[:16]"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 121,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 122,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 125,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 129,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 130,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 131,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 132,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "SecurityConst.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 490,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = 0xC02C"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 492,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = 0xC02B"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 494,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = 0xCCA9"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 498,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = 0xC024"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 500,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = 0xC00A"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 504,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = 0xC023"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 506,
+      "primitive": "ECDSA",
+      "risk": "critical",
+      "content": "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = 0xC009"
+    },
+    {
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/pygments/lexers/_mapping.py",
+      "line": 34,
+      "primitive": "Ed25519",
+      "risk": "critical",
+      "content": "'AscLexer': ('pip._vendor.pygments.lexers.asc', 'ASCII armored', ('asc', 'pem'), ('*.asc', '*.pem', 'id_dsa', 'id_ecdsa', 'id_ecdsa_sk', 'id_ed25519', 'id_ed25519_sk', 'id_rsa'), ('application/pgp-keys', 'application/pgp-encrypted', 'application/pgp-signature', 'application/pem-certificate-chain')),"
+    }
+  ],
+  "recommendations": [
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/poplib.py",
+      "line": 335,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/antigravity.py",
+      "line": 15,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/hashlib.py",
+      "line": 43,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1211,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1143,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/urllib/request.py",
+      "line": 1213,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 148,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 156,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/requests/auth.py",
+      "line": 205,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 212,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 215,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 218,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/joblib/test/test_hashing.py",
+      "line": 228,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/fontTools/varLib/interpolatablePlot.py",
+      "line": 161,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/sklearn/datasets/_openml.py",
+      "line": 526,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pandas/tests/io/pytables/test_store.py",
+      "line": 60,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/numpy/distutils/fcompiler/gnu.py",
+      "line": 402,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "Ed25519",
+      "replacement": "ML-DSA (FIPS 204) / SLH-DSA (FIPS 205)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_php_builtins.py",
+      "line": 2512,
+      "action": "Monitor upstream library for PQC support. Ed25519 used via library dependency."
+    },
+    {
+      "primitive": "Ed25519",
+      "replacement": "ML-DSA (FIPS 204) / SLH-DSA (FIPS 205)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_php_builtins.py",
+      "line": 2513,
+      "action": "Monitor upstream library for PQC support. Ed25519 used via library dependency."
+    },
+    {
+      "primitive": "Ed25519",
+      "replacement": "ML-DSA (FIPS 204) / SLH-DSA (FIPS 205)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/_mapping.py",
+      "line": 34,
+      "action": "Monitor upstream library for PQC support. Ed25519 used via library dependency."
+    },
+    {
+      "primitive": "Ed25519",
+      "replacement": "ML-DSA (FIPS 204) / SLH-DSA (FIPS 205)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pygments/lexers/asc.py",
+      "line": 28,
+      "action": "Monitor upstream library for PQC support. Ed25519 used via library dependency."
+    },
+    {
+      "primitive": "MD5",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 148,
+      "action": "Monitor upstream library for PQC support. MD5 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 156,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "SHA-1",
+      "replacement": "SHA-256 or SHA-3",
+      "difficulty": "medium",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/requests/auth.py",
+      "line": 205,
+      "action": "Monitor upstream library for PQC support. SHA-1 used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 121,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 122,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 125,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 129,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 130,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 131,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "line": 132,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 490,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 492,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 494,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 498,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 500,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 504,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "ECDSA",
+      "replacement": "ML-DSA (FIPS 204)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "line": 506,
+      "action": "Monitor upstream library for PQC support. ECDSA used via library dependency."
+    },
+    {
+      "primitive": "Ed25519",
+      "replacement": "ML-DSA (FIPS 204) / SLH-DSA (FIPS 205)",
+      "difficulty": "high",
+      "controllability": "library",
+      "file": "/home/azureuser/miniconda3/envs/pqc-analyzer/lib/python3.11/site-packages/pip/_vendor/pygments/lexers/_mapping.py",
+      "line": 34,
+      "action": "Monitor upstream library for PQC support. Ed25519 used via library dependency."
+    }
+  ]
+}

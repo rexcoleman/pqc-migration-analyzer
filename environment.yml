@@ -1,0 +1,18 @@
+name: pqc-analyzer
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pytest
+  - pip:
+    - scikit-learn>=1.4
+    - pandas>=2.1
+    - numpy>=1.26
+    - requests
+    - click
+    - rich
+    - pyyaml
+    - tqdm
+    - matplotlib
