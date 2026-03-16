@@ -121,6 +121,28 @@ We built an open-source tool that scans Python codebases for quantum-vulnerable 
 
 ---
 
+## Learning Curve Analysis (CS 7641 Diagnostic)
+
+**Result: Performance plateaus early, confirming limited signal in the feature space. The scanner and NIST PQC mapping infrastructure — not the ML model — are the primary contribution. [DEMONSTRATED] (5 seeds: 42, 123, 456, 789, 1024)**
+
+GradientBoosting validation AUC across training fractions (mean +/- std over 5 seeds):
+
+| Fraction | n_samples | Val AUC (mean) | Val AUC (std) |
+|----------|-----------|----------------|---------------|
+| 0.10 | 618 | 0.5728 | 0.0010 |
+| 0.25 | 1,545 | 0.6035 | 0.0015 |
+| 0.50 | 3,090 | 0.6189 | 0.0003 |
+| 0.75 | 4,635 | 0.6163 | 0.0001 |
+| 1.00 | 6,180 | 0.6339 | 0.0007 |
+
+**Key finding:** Performance rises from 0.57 to 0.60 between 10-25% of training data, then effectively plateaus through the remaining fractions (0.60-0.63 range, a span of ~3pp). The near-zero standard deviations across seeds confirm this is a stable pattern, not noise. Adding more data does not meaningfully improve the model.
+
+**Interpretation:** The CVE feature space (keyword flags, description length, age, CVSS components) contains limited predictive signal for quantum vulnerability prioritization. This is consistent with the RQ2 finding that classical exploitability features dominate over quantum-specific signals. The plateau validates the project's framing: the scanner and NIST PQC mapping are the primary contribution, with ML scoring as a modest enhancement (+14pp over rule-based) rather than the core value.
+
+RandomForest and LogisticRegression show similar or weaker plateau patterns (RF test AUC: 0.550-0.570; LR test AUC: 0.541-0.630), further confirming the feature space ceiling.
+
+---
+
 ## Artifacts
 
 | Artifact | Path |
