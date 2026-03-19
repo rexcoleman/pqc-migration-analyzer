@@ -1,4 +1,4 @@
-# FINDINGS — Post-Quantum Cryptography Migration Analyzer (FP-03)
+# CLAIM: ML-Augmented PQC Migration Scanning Reveals Classical Exploit Risk Dominates Quantum Risk for Priority Scoring
 
 > **Date:** 2026-03-15
 > **Author:** Rex Coleman
@@ -154,6 +154,27 @@ RandomForest and LogisticRegression show similar or weaker plateau patterns (RF 
 | Detection engine | `src/detection/regex_scanner.py` |
 | Migration mapper | `src/migration/nist_mapping.py` |
 | CLI tool | `src/cli.py` |
+
+---
+
+## Negative Results
+
+| Finding | Detail | Why It Matters |
+|---------|--------|----------------|
+| Absolute ML performance is modest | GradientBoosting AUC 0.6345 — only marginally above random | The CVE keyword/CWE feature space has a low ceiling for quantum vulnerability prediction. Scanner infrastructure, not ML scoring, is the primary contribution. |
+| Learning curves plateau early | Performance gains flatten after 25% of training data (0.60 AUC) | More data does not help. The feature representation is the bottleneck, not sample size. |
+| Shor vulnerability is NOT the top predictor | Ranked 6th in feature importance behind classical exploitability signals | Quantum risk is not the best way to prioritize PQC migration — counterintuitive but consistent across all 3 models. |
+| Regex detection has false positives | String matching (e.g., "MD5" in comments) overestimates crypto usage | AST-based detection would improve precision but was out of scope for this project. |
+
+## Content Hooks
+
+| Hook | Format | Target Channel | Tie to Finding |
+|------|--------|---------------|----------------|
+| "Your PQC migration plan is 70% 'wait'" | LinkedIn post (500 words) | LinkedIn | RQ4 controllability |
+| "I scanned Python stdlib for quantum-vulnerable crypto" | Blog post (1200 words) | Substack / dev.to | RQ1 detection |
+| "Classical exploit risk > quantum risk for migration priority" | Thread (8 tweets) | X/Twitter | RQ2 ML scoring |
+| "4 domains, 1 methodology: controllability analysis" | Conference talk abstract | BSides / local meetup | RQ4 cross-domain |
+| "The $0 security research stack" | Blog post (800 words) | Substack | Cost section + govML |
 
 ---
 
